@@ -113,9 +113,9 @@
 
 				<!-- Body -->
 					<section>
-						<h4>Beam-pattern functions</h4>
+						<h3>Beam-pattern functions</h3>
 						<p>
-							Content.
+							TBD.
 						</p>
 
 
@@ -134,18 +134,116 @@
 				<!-- Body -->
 				<section>
 
-					<header>
-						<h3>Synthesize NS population</h3>
-						<p>list_cw</p>
-					</header>
-
 					<p>
-						<code>./list_cw --help</code>
+						The implementation is build as a module for first ET-MDC, 
+						described by <a href="https://apps.et-gw.eu/tds/ql/?c=17879">T. Regimbau and J. Suresh (2025)</a>.
+						Please note that this is the <strong>first version</strong> of the CW implementation,
+						so fell free to <a href="mailto:h.strozyk@student.uw.edu.pl">contact me</a> , if you have any comments or ideas!
+						The usage may change.
+					</p>
+
+					<h3>Instalation &amp; compilation</h3>
+					<div class="col-6 col-12-medium">
+					<p>When using the code, in addition to the libraries required by ET-MDC1, 
+						there will be needed two libraries:</p>
+						<ul>
+							<li>LALPulsar</li>
+							<li>HDF5</li>
+						</ul>
+					</div>
+					<p>
+						The most straightforward way to install the libraires is to use <a href="https://anaconda.org/anaconda/conda">Conda</a>.<br>
+						The code is <strong>compiled</strong> using a Makefile. The command:
+						<pre><code>make ALL</code></pre>
+						does all the work.
 					</p>
 
 
-					<hr/>
+					<h3>Structure</h3>
+						<p>
+							The implementation of continuous gravitational wave signal generation 
+							in ET-MDC can be performed in two ways:
+							<ul>
+								<li>Direct use of the <a href="#deflist"><strong>default list</strong></a> included with the package</li>
+								<li>Custom pulsar population synthesis with <strong>list_cw</strong> code</li>
+							</ul>
+							Finally, the source list is used when creating CW signal in <strong>simul</strong>.
+						</p>
 
+
+					<header>
+						<h3>LIST_CW</h3>
+						<p>Synthesize NS population - user defined list</p>
+					</header>
+					<p>
+						All available commands are visible by
+						<code>./list_cw --help</code>. Which prints:
+
+						<pre><code>
+Options:
+ -h --help                 print this message
+ -i | --in &lt;filename&gt;      input filename from Indri in HDF5 format (defaults to 'CW_Indri')
+ -o | --out &lt;filename&gt;     output txt filename (defaults to 'cw')
+ -n | --num &lt;num&gt;          number of NS in population
+ -s | --seed &lt;seed&gt;        seed for random generation
+ -e | --eps0 &lt;epsilon&gt;     initial ellipticity of NS at formation (defaults to 7.4e-6)
+ -d | --decay &lt;eta&gt;        decay timescale for the ellipticity in Myr (defaults to 1e4, no decay)
+ --verbose                 verbose mode
+ --params                  additional parameters (age, distance, ellipticity, period, period derivative)
+						</code></pre>
+					</p>
+
+					<header>
+						<h4>Input file</h4>
+						<p>Neutron stars population by Indri</p>
+					</header>
+						<p>
+							The CW sources list is generated based on the previously 
+							synthesized population of 100 000 neutron stars in the Milky Way gravitational 
+							potential - <em>CW_Indri.hdf</em>.
+						</p>
+
+						<p>
+							To synthesize a pulsar population, I used the <a href="https://github.com/cieslar/Indri.git">Indri</a> 
+							package described in <a href="https://arxiv.org/abs/1803.02397">Cieślar et al. (2020)</a>. I included the previously 
+							generated population as the package itself is too large to add to MDC.
+						</p>
+
+
+
+					<h4 id="deflist">Default list</h4>
+						<p>
+							It is a list of 100 000 CW sources attached with the package.
+							The file was created with default parameters from the <em>list_cw</em> code 
+							and a <code>--params</code> flag. It provides the easiest way of generating a CW signal.
+						</p>
+					<h4>Custom source?</h4>
+						<p>
+							If you want to simulate a gravitational wave signal from rotating neutron star 
+							with your own known parameters, you can just write the parameters to the file and run 
+							the <em>simul</em> programme. An example:
+						</p>
+						
+						<p><em>Simul</em> input file should contain columns:</p>
+						<pre>
+							<code>
+h0, RA, DEC, f0, df0/dt, initial_phase, polarization, inclination, alpha
+							</code>
+						</pre>
+						<p>
+							Fill the file <code>&lt;filename&gt;.txt</code> with your parameters and run:
+							<pre><code>./simul --cw --cw-in &lt;filename&gt; --ET  &lt;other flags...&gt;</code></pre>
+						</p>
+
+
+					<header>
+						<h3>SIMUL</h3>
+						<p>Simulate CW signal</p>
+					</header>
+
+
+
+					<hr/>
 					</section>
 				</div>
 			</section>
@@ -165,7 +263,7 @@
 					</header>
 
 					<p>
-						Content.
+						TBD.
 					</p>
 
 
