@@ -284,6 +284,9 @@ h0, RA, DEC, f0, df0/dt, initial_phase, polarization, inclination, alpha
 						<p>Simulate CW signal</p>
 					</header>
 						<p>
+							The code accepts both the standard version of the input file, and an extended via the <code>--params</code> flag version.
+						</p>
+						<p>
 							All available commands are visible by <code>./simul --help</code>, but CW relevant parameters are:
 							<pre><code>
 Options:
@@ -326,10 +329,35 @@ Options:
 						<p>
 							CWs are a long-duration signals, this means the modulation should take into
 							account the detector's movement relative to the source. For this purpose, the ephemeris of the
-							Sun (input/sun00-40-DE405.dat) and Earth's (input/earth00-40-DE405.dat) are used. As
+							Sun (<em>input/sun00-40-DE405.dat</em>) and Earth's (<em>input/earth00-40-DE405.dat</em>) are used. As
 							for now the code contains ephemeris spanning time between 2000-2040.
 						</p>
 
+						<h3>Examples</h3>
+							<p>Additional to the examples present on the poster:</p>
+							<ul>
+								<li>
+									<code>./simul --start-time 1000000000 --sampling-rate 8192 --ET --cwacc --cw-num 2 --duration 60 --cw-in myList</code><br>
+									<p>
+										Generates a precise minute-long signal for two sources from an user-generated file
+										<em>lists/myList.txt</em>. The sampling rate is 8192 Hz. The result is stored in three frame files.
+										<br>
+										The command can be rewritten in a <strong>shorter format</strong>:
+									</p>
+									<code>./simul -t 1000000000 -r 8192 --ET --cwacc -p 2 -l 60 -P myList</code>								
+								</li>
+
+								<li>
+									<code>./simul --sampling-rate 4096 --ET --cw --ascii --cw-num 1 --duration 2048 --noise --job 3</code><br>
+									<p>
+										Generates a third signal segment of 2048 seconds in duration. Starting at the default GPS time.
+										The signal includes noise based on the ET PSD. The signal is stored in an ASCII file.
+										<br>
+										Or in a shorter format:
+									</p>
+									<code>./simul -r 4096 --ET --cw --ascii -p 1 -l 2048 --noise -j 3</code>									
+								</li>
+							</ul>
 					<hr/>
 					</section>
 				</div>
