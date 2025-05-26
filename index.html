@@ -11,6 +11,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+		<script id="MathJax-script" async
+			src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+		</script>
+	
 	</head>
 	<body class="is-preload">
 
@@ -108,12 +113,12 @@
 			<section id="MODEL" class="main style1">
 				<div class="container">
 					<header class="major special">
-						<h2>Theory &amp; model</h2>
+						<h1>Theory &amp; model</h1>
 					</header>
 
 				<!-- Body -->
 					<section>
-						<h3>Beam-pattern functions</h3>
+						<h2>Beam-pattern functions</h2>
 						<p>
 							TBD.
 						</p>
@@ -129,7 +134,7 @@
 			<section id="MDC" class="main style1">
 				<div class="container">
 					<header class="major special">
-						<h2>Mock Data Challenge</h2>
+						<h1>Mock Data Challenge</h1>
 					</header>
 				<!-- Body -->
 				<section>
@@ -142,7 +147,7 @@
 						The usage may change.
 					</p>
 
-					<h3>Instalation &amp; compilation</h3>
+					<h2>Instalation &amp; compilation</h2>
 					<div class="col-6 col-12-medium">
 					<p>When using the code, in addition to the libraries required by ET-MDC1, 
 						there will be needed two libraries:</p>
@@ -159,7 +164,9 @@
 					</p>
 
 
-					<h3>Structure</h3>
+					<h2>Structure</h2>
+
+
 						<p>
 							The implementation of continuous gravitational wave signal generation 
 							in ET-MDC can be performed in two ways:
@@ -172,7 +179,7 @@
 
 
 					<header>
-						<h3>LIST_CW</h3>
+						<h2>LIST_CW</h2>
 						<p>Synthesize NS population - user defined list</p>
 					</header>
 					<p>
@@ -194,8 +201,8 @@ Options:
 					</p>
 
 					<header>
-						<h4>Input file</h4>
-						<p>Neutron stars population by Indri</p>
+						<h3>Input file</h3>
+						<p>Raw neutron stars population by Indri</p>
 					</header>
 						<p>
 							The CW sources list is generated based on the previously 
@@ -205,11 +212,47 @@ Options:
 
 						<p>
 							To synthesize a pulsar population, I used the <a href="https://github.com/cieslar/Indri.git">Indri</a> 
-							package described in <a href="https://arxiv.org/abs/1803.02397">Cieślar et al. (2020)</a>. I included the previously 
-							generated population as the package itself is too large to add to MDC.
+							package described in <a href="https://arxiv.org/abs/1803.02397">Cieślar et al. (2020)</a> with 
+							the <i>rotational model</i>.
+							
+							I included the previously generated population as the package itself is too large to add to MDC, 
+							but <strong>if you want to create your own pulsar population</strong> or need a bigger one - 
+							the <em>list_cw</em> input file can be created via Indri as:
+
+							<pre><code>
+./Model -GWPrep -c MCMC.ERotAll.xml -o &lt;filename&gt;.hdf -n &lt;population count&gt;
+							</code></pre>
+
 						</p>
 
+					<header>
+						<h3>Output file</h3>
+						<p>Parameter list of CW sources</p>
+					</header>
+						<p>
+							The minimal query that generates a default population for all data from 
+							models/CW_Indri.hdf is: <code>./list_cw</code>. We then get a file <em>lists/cw.txt</em> 
+							containing parameters in reference time:
+							<ul>
+								<li>\(h_0\)</li>
+								<li>\(\text{RA, DEC [rad]}\) - location of the source</li>
+								<li>\(f_0 \text{ [Hz]}\) and \(\dot f \text{ [Hz}^2]\) - WAVE frequency (double the spin) and spindown</li>
+								<li>\(\psi_0 \text{ [rad]}\) - initial phase</li>
+								<li>\(\phi \text{ [rad]}\) - polarization angle</li>
+								<li>\(i \text{ [rad]}\) - inclination</li>
+								<li>\(\alpha \text{ [rad]}\) - angle between rotation axis and deformation axis</li>
+							</ul>
+						</p>
 
+						<p>The <code>--params</code> flag adds additional parameters to the output file, 
+							which are useful for analysis:
+							<ul>
+								<li>\( \text{Age [Myr]} \)</li>
+								<li>\( \text{Distance [kpc]} \)</li>
+								<li>\( \epsilon \) - ellipticity of the pulsar given the exponential decay model \( \epsilon = \epsilon_0 \exp{(\text{age}/ \eta)} \)</li>
+								<li>\( P \text{ [s], } \dot P \text{ [s/s]} \) - pulsar spin period and its derivative</li>
+							</ul>
+						</p>
 
 					<h4 id="deflist">Default list</h4>
 						<p>
@@ -237,11 +280,55 @@ h0, RA, DEC, f0, df0/dt, initial_phase, polarization, inclination, alpha
 
 
 					<header>
-						<h3>SIMUL</h3>
+						<h2>SIMUL</h2>
 						<p>Simulate CW signal</p>
 					</header>
+						<p>
+							All available commands are visible by <code>./simul --help</code>, but CW relevant parameters are:
+							<pre><code>
+Options:
+ --cw			simulate CW
+ --cwacc		simulate CW to best accuracy
+ ...
+ -p 			CW: number of sources in signal
+ -e 			CW: seed
+ -P 			CW: custom input filename in lists/ (defaults to models/list_CW.txt)			
+							</code></pre>
+						</p>
+
+						<p>
+							<span class="image left"><img src="images/exeTime.jpg" alt="Comparison of execution time." /></span>
+							The simulation can be run having a list of sources from <em>list_cw</em> or using a
+							previously generated list of 100 000 sources in <em>models/list_CW.txt</em>.
+							The CW module in ET-MDC is implemented with two functions from LALPulsar:
+							<ul>
+								<li>
+									<code>XLALSimulateExactPulsarSignal()</code><br>
+									Which provides the best possible precision, but at the cost of computational time and memory. 
+									Short signals preffered.
+								</li>
+								<li><code>XLALGeneratePulsarSignal()</code><br>Best in performance for longer signals.</li>
+							</ul>
+
+							The accuracy approach is approximately 2.5 times slower than the performance one. 
+							Methods' execution time can be descrived approximately by linear model. 
+						</p>
 
 
+						<h3>Jobs and segments</h3>
+						<p>
+							The simulation has support for generating signals in segments. The
+							GPS time parameters are taken from the input file, and the initial phase and frequency are
+							extrapolated to the new segment start time.
+						</p>
+
+						<h3>Ephemeris</h3>
+						<p>
+							CWs are a long-duration signals, this means the modulation should take into
+							account the detector's movement relative to the source. For this purpose, the ephemeris of the
+							Sun (input/sun00-40-DE405.dat) and Earth's (input/earth00-40-DE405.dat) are used. As
+							for now the code contains ephemeris spanning time between 2000-2040.
+						</p>
 
 					<hr/>
 					</section>
@@ -253,12 +340,12 @@ h0, RA, DEC, f0, df0/dt, initial_phase, polarization, inclination, alpha
 			<section id="DETECT" class="main style1">
 				<div class="container">
 					<header class="major special">
-						<h2>Detectability in ET</h2>
+						<h1>Detectability in ET</h1>
 					</header>
 				<!-- Body -->
 				<section>
 					<header>
-						<h3>Sensitivity depth</h3>
+						<h2>Sensitivity depth</h2>
 						<p>Checks the potential detections within source population.</p>
 					</header>
 
