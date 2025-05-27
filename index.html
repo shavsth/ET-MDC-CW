@@ -118,11 +118,12 @@
 
 				<!-- Body -->
 					<section>
-						<h2>Beam-pattern functions</h2>
-						<p>
-							TBD.
-						</p>
+						The theoretical model of continuous gravitational waves in ET-MDC CW implementation is mainly based on 
+						<a href="https://arxiv.org/abs/gr-qc/9804014">Jaranowski et al. (1998)</a> and 
+						<a href="https://arxiv.org/abs/astro-ph/9602107">S. Bonazzola &amp; E. Gourgoulhon (1996)</a>.
 
+
+						
 
 						<hr/>
 					</section>
@@ -300,7 +301,6 @@ Options:
 						</p>
 
 						<p>
-							<span class="image left"><img src="images/exeTime.jpg" alt="Comparison of execution time." /></span>
 							The simulation can be run having a list of sources from <em>list_cw</em> or using a
 							previously generated list of 100 000 sources in <em>models/list_CW.txt</em>.
 							The CW module in ET-MDC is implemented with two functions from LALPulsar:
@@ -308,13 +308,22 @@ Options:
 								<li>
 									<code>XLALSimulateExactPulsarSignal()</code><br>
 									Which provides the best possible precision, but at the cost of computational time and memory. 
-									Short signals preffered.
+									Short signals preffered. 
+									<a href="https://lscsoft.docs.ligo.org/lalsuite/lalpulsar/group___simulate_pulsar_signal__h.html#ga35790ad29c418a1babd4c8c5930270c5">
+										See documentation
+									</a>.
 								</li>
-								<li><code>XLALGeneratePulsarSignal()</code><br>Best in performance for longer signals.</li>
+								<li>
+									<code>XLALGeneratePulsarSignal()</code><br>Best in performance for longer signals.
+									<a href="https://lscsoft.docs.ligo.org/lalsuite/lalpulsar/group___generate_pulsar_signal__h.html">See documentation</a>
+								</li>
 							</ul>
 
+						</p>
+						<p>
+							<span class="image left"><img src="images/exeTime.jpg" alt="Comparison of execution time." /></span>
 							The accuracy approach is approximately 2.5 times slower than the performance one. 
-							Methods' execution time can be descrived approximately by linear model. 
+							Methods' execution time can be descrived approximately by linear model.
 						</p>
 
 
