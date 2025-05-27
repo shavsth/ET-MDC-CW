@@ -118,12 +118,30 @@
 
 				<!-- Body -->
 					<section>
-						The theoretical model of continuous gravitational waves in ET-MDC CW implementation is mainly based on 
-						<a href="https://arxiv.org/abs/gr-qc/9804014">Jaranowski et al. (1998)</a> and 
-						<a href="https://arxiv.org/abs/astro-ph/9602107">S. Bonazzola &amp; E. Gourgoulhon (1996)</a>.
-
-
+						<p>
+							The theoretical model of continuous gravitational waves in ET-MDC CW implementation is mainly based on 
+							section 2 of <a href="https://arxiv.org/abs/gr-qc/9804014">Jaranowski et al. (1998)</a> and in less fraction on section 5. of
+							<a href="https://arxiv.org/abs/astro-ph/9602107">S. Bonazzola &amp; E. Gourgoulhon (1996)</a>.
+						</p>
 						
+						<p>The clue information in addition to the ones present on the poster:</p>
+
+						<h2>Beam-pattern functions</h2>
+						<p>
+							These functions project the signal onto the detector and modulate them due to the 
+							relative motion between the source and the detector.
+							The formula for \(F_+(t)\) and \(F_\times(t)\) is given as:
+
+							\[ F_+(t) = \sin (\measuredangle \, \text{arms}) \; [ a(t) \cos{2\psi} + b(t) \sin{2\psi} ] \]
+							\[ F_\times(t) = \sin (\measuredangle \, \text{arms}) \; [ b(t) \cos{2\psi} - a(t) \sin{2\psi} ] \]
+
+							Where \(\psi\) is a polarization angle. The \( a(t) \) and \( b(t) \) functions 
+							are really complex and long, If you are interested please check eqs. (12) and (13) of 
+							<a href="https://arxiv.org/abs/gr-qc/9804014">Jaranowski et al. (1998)</a>!
+							<br>
+							Currently, the ET configuration supported by MDC is the triangular one, so 
+							\( \measuredangle \, \text{arms} = \pi / 3 \) here.
+						</p>
 
 						<hr/>
 					</section>
@@ -146,6 +164,10 @@
 						Please note that this is the <strong>first version</strong> of the CW implementation,
 						so fell free to <a href="mailto:h.strozyk@student.uw.edu.pl">contact me</a> , if you have any comments or ideas!
 						The usage may change.
+					</p>
+					<p>
+						Currently, the implementation can be only used in C, but with time it may 
+						be accesible by a Python API. 
 					</p>
 
 					<h2>Instalation &amp; compilation</h2>
@@ -367,6 +389,7 @@ Options:
 									<code>./simul -r 4096 --ET --cw --ascii -p 1 -l 2048 --noise -j 3</code>									
 								</li>
 							</ul>
+
 					<hr/>
 					</section>
 				</div>
