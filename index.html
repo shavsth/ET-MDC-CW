@@ -254,7 +254,7 @@ Options:
 						<p>Parameter list of CW sources</p>
 					</header>
 						<p>
-							The minimal query that generates a default population for all data from 
+							The minimal query that generates a default population for data from 
 							models/CW_Indri.hdf is: <code>./list_cw</code>. We then get a file <em>lists/cw.txt</em> 
 							containing parameters in reference time:
 							<ul>
@@ -308,7 +308,7 @@ h0, RA, DEC, f0, df0/dt, initial_phase, polarization, inclination, alpha
 						<p>Simulate CW signal</p>
 					</header>
 						<p>
-							The code accepts both the standard version of the input file, and an extended via the <code>--params</code> flag version.
+							The code accepts both the standard version of the input file, and an extended with <code>--params</code> flag version.
 						</p>
 						<p>
 							All available commands are visible by <code>./simul --help</code>, but CW relevant parameters are:
@@ -345,8 +345,8 @@ Options:
 						</p>
 						<p>
 							<span class="image left"><img src="images/exeTime.jpg" alt="Comparison of execution time." /></span>
-							The accuracy approach is approximately 2.5 times slower than the performance one. 
-							Methods' execution time can be descrived approximately by linear model.
+							<strong>The accuracy approach is about 2.5 times slower than the performance one</strong>. 
+							Methods' execution time can be approximately described by linear model.
 						</p>
 
 
@@ -369,14 +369,14 @@ Options:
 							<p>Additional to the examples present on the poster:</p>
 							<ul>
 								<li>
-									<code>./simul --start-time 1000000000 --sampling-rate 8192 --ET --cwacc --cw-num 2 --duration 60 --cw-in myList</code><br>
+									<code>./simul --start-time 1000000020 --sampling-rate 8192 --ET --cwacc --cw-num 2 --duration 60 --cw-in myList</code><br>
 									<p>
 										Generates a precise minute-long signal for two sources from an user-generated file
 										<em>lists/myList.txt</em>. The sampling rate is 8192 Hz. The result is stored in three frame files.
 										<br>
 										The command can be rewritten in a <strong>shorter format</strong>:
 									</p>
-									<code>./simul -t 1000000000 -r 8192 --ET --cwacc -p 2 -l 60 -P myList</code>								
+									<code>./simul -t 1000000020 -r 8192 --ET --cwacc -p 2 -l 60 -P myList</code>								
 								</li>
 
 								<li>
