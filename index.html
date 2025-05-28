@@ -410,51 +410,53 @@ Options:
 					</header>
 					<p>
 						The first stage of the CW detectability analysis is to perform the <strong>CW search sensitivity depth</strong>. 
-						It is an a <strong>signal-to-noise</strong> ratio method used to compare the search techniques and then
-						check the potential of observing signals in the given NS population.						
+						It is a <strong>signal-to-noise</strong> ratio method used to compare the search techniques and can be used to
+						estimate the potential of observing signals in the given NS population.
 					</p>
 
 					<p>
-						First step is to calculate an upper limit at confidence \(C\) od the GW amplitude \( h_0^C \). 
+						First step is to calculate an upper limit at confidence \(C\) of GW amplitude \( h_0^C \). 
 						This algorithm, as well as the idea of sensitivity depth is best described in section 4.1 of 
 						<a href="https://arxiv.org/abs/2305.07106">Karl Wette (2023)</a>.
-						It is calculated as a ratio of the estimate of detector's noise and the upper limit of the amplitude.
+						It is calculated as a ratio of the estimate of detector's noise and upper limit of the amplitude.
 						<br>
-						The limit is calculated on previously perfomed full searches, such as used here 
+						The limit is calculated on previously perfomed, full searches, such as used here 
 						<a href="#Fstat">\(\text{targeted } \mathcal{F} \text{-statistic}\)</a>. 
-						The values of sensitivity depth, denoted as \( \mathcal D \) can be seen of fig. 6 of K. Wette's article, 
+						Values of sensitivity depth, denoted as \( \mathcal D \), can be seen on fig. 6 of K. Wette's article, 
 						the actual values are stored in table A.3.
 					</p>
 
 					<p>
 						For comparison with <em>ET-MDC's default list</em> I used values according to analysis performed here. 
-						\( \mathcal D \) values for analysed NS population are scaled by the integration time of \( T_\text{obs} = 1 \text{ yr} \) 
+						\( \mathcal D \) values calculated for analysed there NS population are scaled by integration time of \( T_\text{obs} = 1 \text{ yr} \) 
 						and multipled by 1.5 as the triangular ET configuration is used to simulate the signals.
 					</p>
 
 					<h3>Potential detection threshold</h3>
 					<p>
-						The threshold was set as the minimal, average and maximum of the values calculated from the previous searches. 
-						The signal from the particular source is assumed as potentialy observed via chosen search method and observation time 
-						if its sensitivity depth is less than the threshold.
+						The threshold is set as the minimal, average and maximum of the values computed from previous searches. 
+						The signal from the particular <strong>source is assumed as potentialy detectable</strong> with chosen search method and observation time 
+						if its sensitivity depth is <strong>less than the threshold</strong>.
 
-						<span class="image left"><img src="images/histD.jpg" alt="Distribution of sensitivity depth values within default list's sources of ET-MDC." /></span>
+						<div class="col-12"><span class="image fit"><img src="images/histD.jpg" alt="Distribution of sensitivity depth values within default list's sources of ET-MDC." /></span></div>
 
-						The figure shows the distribution of sensitivity depth values for all the sources from <em>default list</em>. 
+						The figure shows the distribution of sensitivity depth values for all sources from <em>default list</em>. 
 						Black lines indicate precomputed values shown in K. Wette (2023). Sources within the grey area are up to be 
 						potentially detected.
 					</p>
 
 					<p>
-						<span class="image right"><img src="images/barplot.jpg" alt="Count of the potentially detectable sources." /></span>
-						The estimated count of detectable sources can be seen on the bar plot on the right. The threholds are defined as earlier - 
+						<div class="col-12">
+							<span class="image fit"><img src="images/barplot.jpg" alt="Count of the potentially detectable sources." /></span>
+						</div>
+						The bar plotTpresents the estimated count of detectable sources. The thresholds are defined as earlier - 
 						from bottom to top: minimal, average and maximum value of the thresholds evaluated from previously, fully completed searches.
+						<br>
+						<strong>
+							It is important to note that the detectability prospects may differentiate from model to model!
+							Analysis performed here describes the population modeled by Indri synthesis toolkit.
+						</strong>
 					</p>
-
-					<p><strong>
-						It is important to note that the detectability prospects may differentiate from model to model!
-						Analysis performed here describes the population modeled by Indri synthesis toolkit.
-					</strong></p>
 					
 
 					<header id="Fstat">
@@ -464,7 +466,7 @@ Options:
 
 					<p>
 						This is the second step of the analysis which is still to be performed. Various sources selected by sensitivity depth will be chosen to 
-						perform targeted search. I plan to not only choose the strongest sources, but also the ones boarding the 
+						perform targeted search. I plan not only to choose the strongest sources, but also the ones boarding the 
 						chosen detectability threshold.
 					</p>
 
@@ -481,8 +483,10 @@ Options:
 					</header>
 				<!-- Body -->
 					<ul>
-						<li><a href="https://arxiv.org/abs/gr-qc/9804014">Jaranowski et al. (1998)</a></li>
+						
 						<li><a href="https://arxiv.org/abs/astro-ph/9602107">S. Bonazzola &amp; E. Gourgoulhon (1996)</a></li>
+						<li><a href="https://arxiv.org/abs/1803.02397">Cieślar et al. (2020)</a></li>
+						<li><a href="https://arxiv.org/abs/gr-qc/9804014">Jaranowski et al. (1998)</a></li>
 						<li><a href="https://arxiv.org/abs/2305.07106">Karl Wette (2023)</a></li>
 						<li>Discussions with David Keitel</li>
 					</ul>
